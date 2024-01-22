@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROULETTE</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        var url = new URL(window.location.href);
+
+        // Get individual parameter values
+        var lobbyId = url.searchParams.get('lobby');
+    
+        socket.on('connect', () => {
+            console.log('Connected to server');
+    
+            // Join a lobby when connected
+            socket.emit('joinLobby', { lobbyId });
+        });
+
+        socket.on('lobbyInfo', (data) => {
+            console.log(data)
+        })
+    
+        socket.on('lobbyJoined', (data) => {
+            console.log('Joined lobby:', data.lobbyId);
+            lobbyId = data.lobbyId
+            updateInfo(data)
+        });
+    
+        socket.on('opponentJoined', (data) => {
+            console.log('Opponent joined the game');
+            updateInfo(data)
+        });
+    
+        // socket.on('opponentEvent', (data) => {
+        //     console.log('Received opponent event:', data);
+        //     // Handle opponent events and update the UI
+        // });
+    
+        // socket.on('opponentLeft', () => {
+        //     console.log('Opponent left the game');
+        //     // Handle opponent disconnection and update the UI
+        // });
+    
+        // // Send game events from the client
+        // function sendGameEvent(eventData) {
+        //     socket.emit('gameEvent', eventData);
+        // }
+    </script>
+    <script>
+        const sendInfo = () => {
+            socket.emit('sendLobbyInfo');
+        }
+
+        const updateInfo = (data) => {
+            url.searchParams.set('lobby', data.lobbyId)
+            history.pushState(null, null, url.href);
+            document.getElementById('lobbyLink').innerHTML = '/lobby?lobby=' + data.lobbyId
+
+            const players = data.players
+            document.getElementById('players').innerHTML = 'Players: ' + players.map(p => p.playerId)
+        }
+    </script>
+</head>
+<body>
+    <h1>LOBBY</h1>
+    <h2>Lobby link:</h2>
+    <h3 id="lobbyLink"></h3>
+    <h2 id="players">Players:</h3>
+    <button onclick="sendInfo()">INFO</button>
+</body>
+</html>
