@@ -10,6 +10,7 @@ app.use(cors())
 
 const server = http.createServer(app);
 const io = new Server(server, {
+    path: '/api-roulette/socket.io',
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
