@@ -22,11 +22,11 @@ app.get('/test', (req, res) => {
     res.send('THIS IS A TEST')
 });
 
-app.get('/', (req, res) => {
+app.get('/api-roulette/', (req, res) => {
     res.sendFile(__dirname + '/static/index.html');
 });
 
-app.get('/lobby', (req, res) => {
+app.get('/api-roulette/lobby', (req, res) => {
     res.sendFile(__dirname + '/static/lobby.html');
 });
 
