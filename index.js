@@ -9,15 +9,13 @@ const app = express();
 app.use(cors())
 
 const server = http.createServer(app);
-const firstIo = new Server(server, {
-    path: '/api-roulette/socket.io',
+const io = new Server(server, {
+    path: '/api-roulette/',
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
     }
 });
-
-const io = firstIo.of('/api-roulette');
 
 app.get('/test', (req, res) => {
     res.send('THIS IS A TEST')
