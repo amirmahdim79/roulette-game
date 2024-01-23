@@ -16,13 +16,13 @@ const io = new Server(server, {
     }
 });
 
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/static/index.html');
-// });
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/static/index.html');
+});
 
-// app.get('/lobby', (req, res) => {
-//     res.sendFile(__dirname + '/static/lobby.html');
-// });
+app.get('/lobby', (req, res) => {
+    res.sendFile(__dirname + '/static/lobby.html');
+});
 
 const lobbies = {};
 
