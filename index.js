@@ -1,5 +1,5 @@
 const express = require('express');
-const http = require('https');
+const http = require('http');
 const { Server } = require('socket.io');
 const { generateId, LOG_LOBBIES_INFO, restartGame, gameInfo, randomTurn, createChamber, getRandomIndex, getRandomElement, generatePerks, getPlayers } = require('./utils');
 const cors = require('cors');
