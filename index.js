@@ -29,10 +29,6 @@ app.get('/lobby', (req, res) => {
     res.sendFile(__dirname + '/static/lobby.html');
 });
 
-app.get('*', (req, res) => {
-    res.send('ALLLLL')
-})
-
 const lobbies = {};
 
 io.use((socket, next) => {
