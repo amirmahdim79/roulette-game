@@ -16,6 +16,10 @@ const io = new Server(server, {
     }
 });
 
+app.get('/test', (req, res) => {
+    res.send('THIS IS A TEST')
+});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/static/index.html');
 });
@@ -23,6 +27,10 @@ app.get('/', (req, res) => {
 app.get('/lobby', (req, res) => {
     res.sendFile(__dirname + '/static/lobby.html');
 });
+
+app.get('*', (req, res) => {
+    res.send('ALLLLL')
+})
 
 const lobbies = {};
 
