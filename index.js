@@ -163,8 +163,22 @@ io.on('connection', (socket) => {
 
             const hasDoubleDamage = player.activePerks.includes("DOUBLE DAMAGE💥")
             const hasExtraTurn = player.activePerks.includes("EXTRA TURN🔁")
+            const hasDealWithDevil = player.activePerks.includes("DEAL WITH DEVIL👹")
             
-            if (move === 'shootMe') {
+            if (hasDealWithDevil) {
+                lobby.turn = opponent.id
+
+                if (bullet) {
+                    player.life -= 2
+                    player.socket.emit('message', { message: "Your SOUL is cursed" })
+                    opponent.socket.emit('message', { message: "Opponent LOST their soul" })
+                } else {
+                    opponent.life -= 3
+                    player.socket.emit('message', { message: "Your SOUL is free" })
+                    opponent.socket.emit('message', { message: "Devil awaits your soul" })
+                }
+            }
+            else if (move === 'shootMe') {
                 if (bullet) {
                     player.life -= hasDoubleDamage ? 2 : 1
                     lobby.turn = hasExtraTurn ? player.id : opponent.id
@@ -297,6 +311,17 @@ io.on('connection', (socket) => {
                 
                 lobby.chamber.splice(lobby.nextInChamber, 1);
                 lobby.nextInChamber = getRandomIndex(lobby.chamber)
+            }
+
+            else if (perk === "DEAL WITH DEVIL👹") {
+                if (player.activePerks.includes(perk)) {
+                    exists = true
+                    player.socket.emit('message', { message: `Already activated` })
+                } else {
+                    player.activePerks.push(perk)
+                    player.socket.emit('message', { message: `You have made a deal with the devil` })
+                    opponent.socket.emit('message', { message: "Opponent SOLD their soul..." })
+                }
             }
 
             if (!exists) player.perks.splice(perkIndex, 1);

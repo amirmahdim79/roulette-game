@@ -10,7 +10,7 @@ const GAME_INFO = {
 }
 
 const ROUND_CHAMBERS = {
-    1: [1],
+    1: [1, 2],
     2: [2, 3, 4],
     3: [4, 5],
     4: [],
@@ -23,6 +23,7 @@ const PERKS = [
     "EXTRA TURN🔁",
     "NEXT IN CHAMBER🔍",
     "LIFE FOR PERK💘",
+    "DEAL WITH DEVIL👹",
 ]
 
 module.exports = {
