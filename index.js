@@ -208,6 +208,9 @@ io.on('connection', (socket) => {
             if (hasExtraTurn) {
                 player.activePerks = player.activePerks.filter(perk => perk !== "EXTRA TURN🔁")
             }
+            if (hasDealWithDevil) {
+                player.activePerks = player.activePerks.filter(perk => perk !== "DEAL WITH DEVIL👹")
+            }
 
             lobby.chamber.splice(nextInChamber, 1);
 
