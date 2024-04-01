@@ -283,6 +283,7 @@ io.on('connection', (socket) => {
                 player.life = opponent.life
                 opponent.life = playerLives
                 lobby.turn = opponent.id
+                player.activePerks = []
                 player.socket.emit('message', { message: `Lives switched` })
                 opponent.socket.emit('message', { message: "Opponent switched lives" })
             }
@@ -312,11 +313,11 @@ io.on('connection', (socket) => {
             else if (perk === "LIFE FOR PERK💘") {
                 if (player.life > 1) {
                     player.life -= 1
+                    const perk = getRandomElement(PERKS)
+                    player.perks.push(perk)
+                    player.socket.emit('message', { message: `Gave life for ${perk}` })
+                    opponent.socket.emit('message', { message: `Opponent gave life for ${perk}` })
                 }
-                const perk = getRandomElement(PERKS)
-                player.perks.push(perk)
-                player.socket.emit('message', { message: `Gave life for ${perk}` })
-                opponent.socket.emit('message', { message: `Opponent gave life for ${perk}` })
             }
 
             else if (perk === "DISCARD SHELL🗑️") {
