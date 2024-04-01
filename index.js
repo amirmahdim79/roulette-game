@@ -278,6 +278,14 @@ io.on('connection', (socket) => {
                 opponent.socket.emit('message', { message: "Opponent saw the next round" })
             }
 
+            else if (perk === "SWITCH LIVES💞") {
+                const playerLives = player.life
+                player.life = opponent.life
+                opponent.life = playerLives
+                player.socket.emit('message', { message: `Lives switched` })
+                opponent.socket.emit('message', { message: "Opponent switched lives" })
+            }
+
             else if (perk === "DOUBLE DAMAGE💥") {
                 if (player.activePerks.includes(perk)) {
                     exists = true

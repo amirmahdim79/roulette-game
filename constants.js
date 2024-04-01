@@ -24,6 +24,7 @@ const PERKS = [
     "NEXT IN CHAMBER🔍",
     "LIFE FOR PERK💘",
     "DEAL WITH DEVIL👹",
+    "SWITCH LIVES💞",
 ]
 
 module.exports = {
