@@ -90,8 +90,16 @@ const generatePerks = (round, player, opponent) => {
     player.perks = []
     opponent.perks = []
     for (i = 0; i < max_perks; i++) {
-        player.perks.push(getRandomElement(PERKS))
-        opponent.perks.push(getRandomElement(PERKS))
+        let pperk = getRandomElement(PERKS)
+        while ((pperk === "DEAL WITH DEVIL👹") && (player.perks.includes["NEXT IN CHAMBER🔍"])) {
+            pperk = getRandomElement(PERKS)
+        }
+        let operk = getRandomElement(PERKS)
+        while ((operk === "DEAL WITH DEVIL👹") && (opponent.perks.includes["NEXT IN CHAMBER🔍"])) {
+            operk = getRandomElement(PERKS)
+        }
+        player.perks.push(pperk)
+        opponent.perks.push(operk)
     }
 }
 
